@@ -1,0 +1,30 @@
+services:
+  server:
+    command:
+    - -world
+    - /worlds/terraria.wld
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4g
+        reservations:
+          cpus: '1.0'
+          memory: 2g
+      restart_policy:
+        condition: any
+        delay: 15s
+        max_attempts: 5
+        window: 45s
+    image: s3bul/tshock:5.1.3
+    ports:
+    - published: 7777
+      target: 7777
+    - published: 7878
+      target: 7878
+    volumes:
+    - .docker/data/tshock:/tshock:rw
+    - .docker/data/worlds:/worlds:rw
+    - .docker/data/plugins:/plugins:rw
+version: '3.9'
+
