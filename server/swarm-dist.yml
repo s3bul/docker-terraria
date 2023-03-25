@@ -6,11 +6,11 @@ services:
     deploy:
       resources:
         limits:
+          cpus: '4.0'
+          memory: 8g
+        reservations:
           cpus: '2.0'
           memory: 4g
-        reservations:
-          cpus: '1.0'
-          memory: 2g
       restart_policy:
         condition: any
         delay: 15s
