@@ -1,0 +1,24 @@
+services:
+  server:
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8g
+        reservations:
+          cpus: '3.0'
+          memory: 4g
+      restart_policy:
+        condition: any
+        delay: 15s
+        max_attempts: 5
+        window: 45s
+    image: s3bul/tmodloader:2022.09.47.44
+    ports:
+    - published: 7777
+      target: 7777
+    volumes:
+    - .docker/data/conf:/home/terraria/conf:rw
+    - .docker/data/Terraria:/home/terraria/.local/share/Terraria:rw
+version: '3.9'
+

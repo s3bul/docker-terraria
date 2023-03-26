@@ -1,0 +1,4 @@
+[submodule "TShock/TShock"]
+	path = TShock/TShock
+	url = https://github.com/Pryaxis/TShock.git
+    branch = general-devel

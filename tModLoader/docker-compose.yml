@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  build:
+    build:
+      network: host
+      context: .
+      target: server
+      args:
+        IMAGE_DOTNET_SDK_NAME: ${IMAGE_DOTNET_SDK_NAME}
+        IMAGE_DOTNET_RUNTIME_NAME: ${IMAGE_DOTNET_RUNTIME_NAME}
+        IMAGE_DOTNET_VERSION: ${IMAGE_DOTNET_VERSION}
+        TMODLOADER_VERSION: ${TMODLOADER_VERSION}
+      cache_from:
+      - ${BUILD_IMAGE_NAME}:${TMODLOADER_VERSION}
+    image: ${BUILD_IMAGE_NAME}:${TMODLOADER_VERSION}
+    profiles:
+    - build
+
+  server:
+    image: ${BUILD_IMAGE_NAME}:${TMODLOADER_VERSION}
+    ports:
+    - "7777:7777"
+    restart: unless-stopped
+    volumes:
+    - ./server/.docker/data/conf:/home/terraria/conf
+    - ./server/.docker/data/Terraria:/home/terraria/.local/share/Terraria
+    deploy:
+      resources:
+        reservations:
+          cpus: ${DEPLOY_CPU_RESERVATION}
+          memory: ${DEPLOY_MEMORY_RESERVATION}
+        limits:
+          cpus: ${DEPLOY_CPU_LIMIT}
+          memory: ${DEPLOY_MEMORY_LIMIT}

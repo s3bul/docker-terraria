@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  server:
+    image: ${IMAGE_TSHOCK_NAME}:${IMAGE_TSHOCK_VERSION}
+    ports:
+    - "7777:7777"
+    - "7878:7878"
+    restart: unless-stopped
+    volumes:
+    - ./server/.docker/data/tshock:/tshock
+    - ./server/.docker/data/worlds:/worlds
+    - ./server/.docker/data/plugins:/plugins
+    command:
+    - -world
+    - /worlds/${WORLD_NAME}.wld
+    deploy:
+      resources:
+        reservations:
+          cpus: ${DEPLOY_CPU_RESERVATION}
+          memory: ${DEPLOY_MEMORY_RESERVATION}
+        limits:
+          cpus: ${DEPLOY_CPU_LIMIT}
+          memory: ${DEPLOY_MEMORY_LIMIT}
+      restart_policy:
+        condition: any
+        delay: 15s
+        max_attempts: 5
+        window: 45s
