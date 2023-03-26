@@ -15,4 +15,4 @@ chown -R "${USER_UID}:0" ./server/.docker &&
   (cd ./server &&
     cp swarm-dist.yml swarm.yml) &&
   touch ./.server-init &&
-  chown "${USER_UID}:0" ./.server-init
+  chown "${USER_UID}:0" ./.server-init ./server/swarm.yml
