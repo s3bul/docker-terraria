@@ -13,5 +13,5 @@ docker compose run server &&
   (docker swarm init 2>/dev/null || echo "swarm") &&
   (cd ./server &&
     cp swarm-dist.yml swarm.yml &&
-    docker stack deploy -c swarm.yml terraria) &&
+    docker stack deploy -c swarm.yml tr) &&
   touch ./.server-init
