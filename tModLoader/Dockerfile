@@ -25,6 +25,7 @@ LABEL maintainer="Sebastian Korzeniecki <seba5zer@gmail.com>"
 ENV TERRARIA_USER=terraria
 ENV TERRARIA_HOME=/home/${TERRARIA_USER}
 ENV SERVER_HOME=${TERRARIA_HOME}/server
+ENV TMP_HOME=${TERRARIA_HOME}/tmp
 ENV CONF_HOME=${TERRARIA_HOME}/conf
 ENV TERRARIA_LOCAL_DIR=${TERRARIA_HOME}/.local/share/Terraria
 
@@ -32,15 +33,15 @@ RUN apk add bash && \
   adduser -D ${TERRARIA_USER} && \
   addgroup ${TERRARIA_USER} root && \
   addgroup root ${TERRARIA_USER} && \
-  mkdir -p ${SERVER_HOME} ${CONF_HOME} ${TERRARIA_LOCAL_DIR} && \
-  chmod g+rwxs ${TERRARIA_HOME} ${SERVER_HOME} ${CONF_HOME} ${TERRARIA_LOCAL_DIR} && \
+  mkdir -p ${SERVER_HOME} ${CONF_HOME} ${TMP_HOME} ${TERRARIA_LOCAL_DIR} && \
+  chmod g+rwxs ${TERRARIA_HOME} ${SERVER_HOME} ${CONF_HOME} ${TMP_HOME} ${TERRARIA_LOCAL_DIR} && \
   chown -R ${TERRARIA_USER}:0 ${TERRARIA_HOME}
 
 USER ${TERRARIA_USER}:0
 
 WORKDIR ${TERRARIA_HOME}
 
-COPY --from=build --chown=${TERRARIA_USER}:0 /opt/tModLoader/server ${SERVER_HOME}
+COPY --from=build --chown=${TERRARIA_USER}:0 /opt/tModLoader/server ${TMP_HOME}
 COPY --chown=${TERRARIA_USER}:0 docker-entrypoint.sh ${TERRARIA_HOME}
 
 EXPOSE 7777

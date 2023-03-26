@@ -2,8 +2,9 @@
 set -e
 
 initServer() {
-  cp -n "${SERVER_HOME}"/serverconfig.txt "${CONF_HOME}"/
-  touch "${SERVER_HOME}"/.server-inited
+  cp -n "${SERVER_HOME}"/serverconfig.txt "${CONF_HOME}"/ &&
+    cp -urf "${TMP_HOME}"/. "${SERVER_HOME}" &&
+    touch "${SERVER_HOME}"/.server-inited
 }
 
 runServer() {

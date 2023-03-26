@@ -18,6 +18,7 @@ services:
     - published: 7777
       target: 7777
     volumes:
+    - .docker/data/server:/home/terraria/server
     - .docker/data/conf:/home/terraria/conf:rw
     - .docker/data/Terraria:/home/terraria/.local/share/Terraria:rw
 version: '3.9'
