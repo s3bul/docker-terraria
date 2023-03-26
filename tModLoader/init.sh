@@ -7,11 +7,11 @@ fi
 
 USER_UID=${USER_UID:-$(id -u)}
 
-chown -R "${USER_UID}:0" ./server/.docker &&
-  chmod -R g+w ./server/.docker &&
+chown -vR "${USER_UID}:0" ./server/.docker &&
+  chmod -vR g+w ./server/.docker &&
   (docker compose run -u "${USER_UID}:0" server || echo "run-server") &&
   (docker swarm init 2>/dev/null || echo "swarm") &&
   (cd ./server &&
-    cp -n swarm-dist.yml swarm.yml) &&
+    cp -vn swarm-dist.yml swarm.yml) &&
   touch ./.server-init &&
-  chown "${USER_UID}:0" ./.server-init ./server/swarm.yml
+  chown -v "${USER_UID}:0" ./.server-init ./server/swarm.yml
