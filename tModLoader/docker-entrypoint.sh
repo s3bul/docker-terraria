@@ -8,7 +8,7 @@ initServer() {
 }
 
 runServer() {
-  if [ ! -x "${SERVER_HOME}"/.server-inited ]; then
+  if [ ! -f "${SERVER_HOME}"/.server-inited ]; then
     initServer
   fi
 
