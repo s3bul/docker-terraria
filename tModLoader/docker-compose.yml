@@ -23,7 +23,6 @@ services:
     - "7777:7777"
     restart: unless-stopped
     volumes:
-    - ./server/.docker/data/server:/home/terraria/server
     - ./server/.docker/data/conf:/home/terraria/conf
     - ./server/.docker/data/Terraria:/home/terraria/.local/share/Terraria
     deploy:
