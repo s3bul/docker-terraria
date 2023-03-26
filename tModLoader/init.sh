@@ -9,9 +9,8 @@ USER_UID=${USER_UID:-$(id -u)}
 
 chown -R "${USER_UID}:0" ./server/.docker &&
   chmod -R g+w ./server/.docker &&
-  docker compose run -u "${USER_UID}:0" server
-
-(docker swarm init 2>/dev/null || echo "swarm") &&
+  (docker compose run -u "${USER_UID}:0" server || echo "run-server") &&
+  (docker swarm init 2>/dev/null || echo "swarm") &&
   (cd ./server &&
     cp -n swarm-dist.yml swarm.yml) &&
   touch ./.server-init &&
