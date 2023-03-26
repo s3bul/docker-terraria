@@ -7,9 +7,9 @@ fi
 
 USER_UID=${USER_UID:-$(id -u)}
 
-docker compose run server &&
-  sudo chown -R "${USER_UID}:0" ./server/.docker &&
+sudo chown -R "${USER_UID}:0" ./server/.docker &&
   chmod -R g+w ./server/.docker &&
+  docker compose run server &&
   (docker swarm init 2>/dev/null || echo "swarm") &&
   (cd ./server &&
     cp swarm-dist.yml swarm.yml &&
