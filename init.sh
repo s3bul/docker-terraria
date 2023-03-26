@@ -5,7 +5,7 @@ if [ -f ./.server-init ]; then
   exit 1
 fi
 
-USER_UID=$(id -u)
+USER_UID=${USER_UID:-$(id -u)}
 
 docker compose run server --create &&
   sudo chown -R "${USER_UID}:0" ./server/.docker &&
