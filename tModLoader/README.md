@@ -7,4 +7,4 @@
 3. After create new world, turn off server
 4. Switch user `su - terraria`
 5. Update files `./server/.docker/data/conf/serverconfig.txt` and `./server/swarm.yml`
-6. In `server` path run command `docker stack deploy -c swarm.yml tr`
+6. Run command `docker stack deploy -c ./server/swarm.yml tr`
