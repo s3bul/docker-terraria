@@ -13,6 +13,12 @@ services:
         delay: 15s
         max_attempts: 5
         window: 45s
+    healthcheck:
+      interval: 15s
+      retries: 30
+      start_period: 50s
+      test: nc -z localhost 7777
+      timeout: 2s
     image: s3bul/tmodloader:2022.09.47.44
     ports:
     - published: 7777
