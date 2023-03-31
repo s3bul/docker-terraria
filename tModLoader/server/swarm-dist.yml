@@ -4,10 +4,10 @@ services:
       resources:
         limits:
           cpus: '4.0'
-          memory: 8g
+          memory: 4g
         reservations:
           cpus: '3.0'
-          memory: 4g
+          memory: 2g
       restart_policy:
         condition: any
         delay: 15s
